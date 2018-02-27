@@ -83,45 +83,4 @@ class HTMLPurifier
     {
        
     }
-    
-    /**
-     * Singleton for enforcing just one HTML Purifier in your system
-     *
-     * @param HTMLPurifier|Config $prototype Optional prototype
-     *                   HTMLPurifier instance to overload singleton with,
-     *                   or Config instance to configure the
-     *                   generated version with.
-     *
-     * @return HTMLPurifier
-     */
-    public static function instance(prototype = null) -> <HTMLPurifier>
-    {
-        if !(self::instance) || prototype {
-            if prototype instanceof HTMLPurifier {
-                let self::instance = prototype;
-            } elseif prototype {
-                let self::instance =  new HTMLPurifier(prototype);
-            } else {
-                let self::instance =  new HTMLPurifier();
-            }
-        }
-        return self::instance;
-    }
-    
-    /**
-     * Singleton for enforcing just one HTML Purifier in your system
-     *
-     * @param HTMLPurifier|Config $prototype Optional prototype
-     *                   HTMLPurifier instance to overload singleton with,
-     *                   or Config instance to configure the
-     *                   generated version with.
-     *
-     * @return HTMLPurifier
-     * @note Backwards compatibility, see instance()
-     */
-    public static function getInstance(prototype = null) -> <HTMLPurifier>
-    {
-        return HTMLPurifier::instance(prototype);
-    }
-
 }
