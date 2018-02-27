@@ -1,5 +1,6 @@
 namespace HTMLPurifier;
 
+use HTMLPurifier\Strategy\StrategyCore;
 /*! @mainpage
  *
  * HTML Purifier is an HTML filter that will take an arbitrary snippet of
@@ -97,7 +98,8 @@ class HTMLPurifier
      */
     public function __construct(config = null) -> void
     {
-
+        let this->config =  Config::create(config);
+        let this->strategy =  new StrategyCore();
     }
     
     /**
@@ -105,7 +107,7 @@ class HTMLPurifier
      *
      * @param Filter $filter Filter object
      */
-    public function addFilter(var filter) -> void
+    public function addFilter(<Filter> filter) -> void
     {
         trigger_error("HTMLPurifier->addFilter() is deprecated, use configuration directives" . " in the Filter namespace or Filter.Custom", E_USER_WARNING);
         let this->filters[] = filter;
@@ -122,10 +124,68 @@ class HTMLPurifier
      *
      * @return string Purified HTML
      */
-    public function purify(string html, var config = null) -> string
+    public function purify(string html, <Config> config = null) -> string
     {
         var lexer, context, language_factory, language, error_collector, id_accumulator, filter_flags, custom_filters, filters, filter, flag, classs, i, filter_size;
     
+        // :TODO: make the config merge in, instead of replace
+        let config =  config ? Config::create(config)  : this->config;
+        // implementation is partially environment dependant, partially
+        // configuration dependant
+        let lexer =  Lexer::create(config);
+        let context =  new Context();
+        // setup HTML generator
+        let this->generator =  new Generator(config, context);
+        context->register("Generator", this->generator);
+        // set up global context variables
+        if config->get("Core.CollectErrors") {
+            // may get moved out if other facilities use it
+            let language_factory =  LanguageFactory::instance();
+            let language =  language_factory->create(config, context);
+            context->register("Locale", language);
+            let error_collector =  new ErrorCollector(context);
+            context->register("ErrorCollector", error_collector);
+        }
+        // setup id_accumulator context, necessary due to the fact that
+        // AttrValidator can be called from many places
+        let id_accumulator =  IDAccumulator::build(config, context);
+        context->register("IDAccumulator", id_accumulator);
+        let html =  Encoder::convertToUTF8(html, config, context);
+        // setup filters
+        let filter_flags =  config->getBatch("Filter");
+        let custom_filters = filter_flags["Custom"];
+        unset filter_flags["Custom"];
+        
+        let filters =  [];
+        for filter, flag in filter_flags {
+            if !(flag) {
+                continue;
+            }
+            if strpos(filter, ".") !== false {
+                continue;
+            }
+            let classs = "Filter_{filter}";
+            let filters[] = new {classs}();
+        }
+        for filter in custom_filters {
+            // maybe "Filter_$filter", but be consistent with AutoFormat
+            let filters[] = filter;
+        }
+        let filters =  array_merge(filters, this->filters);
+        // maybe prepare(), but later
+        let i = 0;
+        let filter_size =  count(filters);
+        for i in range(0, filter_size) {
+            let html =  filters[i]->preFilter(html, config, context);
+        }
+        // purified HTML
+        let html =  this->generator->generateFromTokens(this->strategy->execute(lexer->tokenizeHTML(html, config, context), config, context));
+        let i =  filter_size - 1;
+        for i in range(filter_size - 1, 0) {
+            let html =  filters[i]->postFilter(html, config, context);
+        }
+        let html =  Encoder::convertFromUTF8(html, config, context);
+        let this->context = context;
         return html;
     }
     
@@ -138,7 +198,7 @@ class HTMLPurifier
      *
      * @return string[] Array of purified HTML
      */
-    public function purifyArray(array array_of_html, var config = null) -> array
+    public function purifyArray(array array_of_html, <Config> config = null) -> array
     {
         var context_array, key, html;
     
