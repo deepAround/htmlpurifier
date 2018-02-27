@@ -4,6 +4,11 @@ namespace HTMLPurifier;
 class HTMLPurifier
 {
     /**
+     * Version of HTML Purifier.
+     * @type string
+     */
+    public version = "4.10.0";
+    /**
      * Constant with version of HTML Purifier.
      */
     const VERSION = "4.10.0";
@@ -57,7 +62,7 @@ class HTMLPurifier
      *
      * @param Filter $filter Filter object
      */
-    public function addFilter(<Filter> filter) -> void
+    public function addFilter(var filter) -> void
     {
         trigger_error("HTMLPurifier->addFilter() is deprecated, use configuration directives" . " in the Filter namespace or Filter.Custom", E_USER_WARNING);
         let this->filters[] = filter;
@@ -74,7 +79,7 @@ class HTMLPurifier
      *
      * @return string Purified HTML
      */
-    public function purify(string html, <Config> config = null)
+    public function purify(string html, var config = null)
     {
        
     }
