@@ -27,8 +27,8 @@ class LexerPH5P extends LexerDOMLex
         let new_html =  this->normalize(html, config, context);
         let new_html =  this->wrapHTML(new_html, config, context, false);
         try {
-            let parser =  new HTML5(new_html);
-            let doc =  parser->save();
+            /*let parser =  new HTML5(new_html);
+            let doc =  parser->save();*/
         } catch DOMException, e {
             // Uh oh, it failed. Punt to DirectLex.
             let lexer =  new LexerDirectLex();
