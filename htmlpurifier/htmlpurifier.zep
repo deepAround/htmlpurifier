@@ -4,8 +4,6 @@ namespace HTMLPurifier;
 class HTMLPurifier
 {
     
-    public version = "4.10.0";
-    
     const VERSION = "4.10.0";
     
     public config;
