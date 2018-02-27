@@ -32,8 +32,8 @@
     },
     "namespace": "HTMLPurifier/",
     "name": "htmlpurifier/",
-    "description": "my description",
-    "author": "my name",
+    "description": "HTMLPurifier converted from php to zephir",
+    "author": "June PARK",
     "version": "0.0.1",
     "verbose": true
 }
