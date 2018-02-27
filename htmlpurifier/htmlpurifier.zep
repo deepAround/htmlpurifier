@@ -64,7 +64,6 @@ class HTMLPurifier
      */
     public function addFilter(var filter) -> void
     {
-        trigger_error("HTMLPurifier->addFilter() is deprecated, use configuration directives" . " in the Filter namespace or Filter.Custom", E_USER_WARNING);
         let this->filters[] = filter;
     }
     
