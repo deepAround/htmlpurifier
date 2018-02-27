@@ -127,31 +127,9 @@ class HTMLPurifier
      *
      * @return string Purified HTML
      */
-    public function purify(string html, <Config> config = null) -> string
+    public function purify(string html, <Config> config = null)
     {
        
-    }
-    
-    /**
-     * Filters an array of HTML snippets
-     *
-     * @param string[] $array_of_html Array of html snippets
-     * @param Config $config Optional config object for this operation.
-     *                See HTMLPurifier::purify() for more details.
-     *
-     * @return string[] Array of purified HTML
-     */
-    public function purifyArray(array array_of_html, <Config> config = null) -> array
-    {
-        var context_array, key, html;
-    
-        let context_array =  [];
-        for key, html in array_of_html {
-            let array_of_html[key] =  this->purify(html, config);
-            let context_array[key] = this->context;
-        }
-        let this->context = context_array;
-        return array_of_html;
     }
     
     /**
