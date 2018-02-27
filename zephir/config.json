@@ -30,8 +30,8 @@
         "static-constant-class-folding": true,
         "private-internal-methods": true
     },
-    "namespace": "HTMLPurifier/",
-    "name": "htmlpurifier/",
+    "namespace": "htmlpurifier",
+    "name": "HTMLPurifier",
     "description": "HTMLPurifier converted from php to zephir",
     "author": "June PARK",
     "version": "0.0.1",
