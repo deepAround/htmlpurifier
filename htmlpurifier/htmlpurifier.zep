@@ -27,7 +27,7 @@ class HTMLPurifier
     
     public function addFilter(var filter) -> void
     {
-        let this->filters[] = filter;
+        
     }
     
     public function purify(string html, var config = null)
