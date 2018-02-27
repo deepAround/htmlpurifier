@@ -17,8 +17,7 @@ use HTMLPurifier\Strategy\StrategyCore;
  *
  * However, most users will only need to interface with the HTMLPurifier
  * and Config.
- */
-/*
+ *
    HTML Purifier 4.10.0 - Standards Compliant HTML Filtering
    Copyright (C) 2006-2008 Edward Z. Yang
 
@@ -35,8 +34,8 @@ use HTMLPurifier\Strategy\StrategyCore;
    You should have received a copy of the GNU Lesser General Public
    License along with this library; if not, write to the Free Software
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-*/
-/**
+ *
+ *
  * Facade that coordinates HTML Purifier's subsystems in order to purify HTML.
  *
  * @note There are several points in which configuration can be specified
