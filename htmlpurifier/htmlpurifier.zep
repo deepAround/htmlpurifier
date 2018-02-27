@@ -4,11 +4,6 @@ namespace HTMLPurifier;
 class HTMLPurifier
 {
     /**
-     * Version of HTML Purifier.
-     * @type string
-     */
-    public version = "4.10.0";
-    /**
      * Constant with version of HTML Purifier.
      */
     const VERSION = "4.10.0";
