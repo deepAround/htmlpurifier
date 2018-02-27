@@ -52,8 +52,8 @@ class PrinterConfigForm extends Printer
         $this->name = $name;
         $this->compress = $compress;
         // initialize sub-printers
-        $this->fields[0] = new PrinterConfigForm_default();
-        $this->fields[VarParser::BOOL] = new PrinterConfigForm_bool();
+        $this->fields[0] = new PrinterConfigFormdefault();
+        $this->fields[VarParser::BOOL] = new PrinterConfigFormbool();
     }
 
     /**
@@ -197,7 +197,7 @@ class PrinterConfigForm extends Printer
             } // default
             $type_obj = $this->fields[$type];
             if ($allow_null) {
-                $type_obj = new PrinterConfigForm_NullDecorator($type_obj);
+                $type_obj = new PrinterConfigFormNullDecorator($type_obj);
             }
             $ret .= $type_obj->render($ns, $directive, $value, $this->name, array($this->genConfig, $this->config));
             $ret .= $this->end('td');
@@ -212,7 +212,7 @@ class PrinterConfigForm extends Printer
 /**
  * Printer decorator for directives that accept null
  */
-class PrinterConfigForm_NullDecorator extends Printer
+class PrinterConfigFormNullDecorator extends Printer
 {
     /**
      * Printer being decorated
@@ -260,7 +260,7 @@ class PrinterConfigForm_NullDecorator extends Printer
             'id' => "$name:Null_$ns.$directive",
             'onclick' => "toggleWriteability('$name:$ns.$directive',checked)" // INLINE JAVASCRIPT!!!!
         );
-        if ($this->obj instanceof PrinterConfigForm_bool) {
+        if ($this->obj instanceof PrinterConfigFormbool) {
             // modify inline javascript slightly
             $attr['onclick'] =
                 "toggleWriteability('$name:Yes_$ns.$directive',checked);" .
@@ -280,7 +280,7 @@ class PrinterConfigForm_NullDecorator extends Printer
 /**
  * Swiss-army knife configuration form field printer
  */
-class PrinterConfigForm_default extends Printer
+class PrinterConfigFormdefault extends Printer
 {
     /**
      * @type int
@@ -387,7 +387,7 @@ class PrinterConfigForm_default extends Printer
 /**
  * Bool form field printer
  */
-class PrinterConfigForm_bool extends Printer
+class PrinterConfigFormbool extends Printer
 {
     /**
      * @param string $ns
