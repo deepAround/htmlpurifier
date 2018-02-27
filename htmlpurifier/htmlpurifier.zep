@@ -1,54 +1,6 @@
 namespace HTMLPurifier;
 
-/*! @mainpage
- *
- * HTML Purifier is an HTML filter that will take an arbitrary snippet of
- * HTML and rigorously test, validate and filter it into a version that
- * is safe for output onto webpages. It achieves this by:
- *
- *  -# Lexing (parsing into tokens) the document,
- *  -# Executing various strategies on the tokens:
- *      -# Removing all elements not in the whitelist,
- *      -# Making the tokens well-formed,
- *      -# Fixing the nesting of the nodes, and
- *      -# Validating attributes of the nodes; and
- *  -# Generating HTML from the purified tokens.
- *
- * However, most users will only need to interface with the HTMLPurifier
- * and Config.
- */
-/*
-   HTML Purifier 4.10.0 - Standards Compliant HTML Filtering
-   Copyright (C) 2006-2008 Edward Z. Yang
 
-   This library is free software; you can redistribute it and/or
-   modify it under the terms of the GNU Lesser General Public
-   License as published by the Free Software Foundation; either
-   version 2.1 of the License, or (at your option) any later version.
-
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   Lesser General Public License for more details.
-
-   You should have received a copy of the GNU Lesser General Public
-   License along with this library; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-*/
-/**
- * Facade that coordinates HTML Purifier's subsystems in order to purify HTML.
- *
- * @note There are several points in which configuration can be specified
- *       for HTML Purifier.  The precedence of these (from lowest to
- *       highest) is as follows:
- *          -# Instance: new HTMLPurifier($config)
- *          -# Invocation: purify($html, $config)
- *       These configurations are entirely independent of each other and
- *       are *not* merged (this behavior may change in the future).
- *
- * @todo We need an easier way to inject strategies using the configuration
- *       object.
- */
 class HTMLPurifier
 {
     /**
