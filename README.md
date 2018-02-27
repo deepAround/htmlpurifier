@@ -11,20 +11,11 @@ be configured to accept a more restrictive set of tags, but it won't be
 as efficient as more bare-bones parsers. It will, however, do the job
 right, which may be more important.
 
-Places to go:
 
-* See INSTALL for a quick installation guide
-* See docs/ for developer-oriented documentation, code examples and
-  an in-depth installation guide.
-* See WYSIWYG for information on editors like TinyMCE and FCKeditor
-
-HTML Purifier can be found on the web at: [http://htmlpurifier.org/](http://htmlpurifier.org/)
 
 ## Installation
 
-Package available on [Composer](https://packagist.org/packages/ezyang/htmlpurifier).
-
-If you're using Composer to manage dependencies, you can use
+If you're using zephir, you can use
 
     $ git clone https://github.com/deepAround/htmlpurifier
     $ cd htmlpurifier
