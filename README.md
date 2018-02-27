@@ -26,4 +26,6 @@ Package available on [Composer](https://packagist.org/packages/ezyang/htmlpurifi
 
 If you're using Composer to manage dependencies, you can use
 
-    $ composer require "ezyang/htmlpurifier":"dev-master"
+    $ git clone https://github.com/deepAround/htmlpurifier
+    $ cd htmlpurifier
+    $ zephir build
